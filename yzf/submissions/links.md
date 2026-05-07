@@ -5,4 +5,4 @@
 
 ## 2026年5月批次
 
-<!-- 在此添加链接 -->
+https://github.com/RTasdawdsafgg/git-training-test.git
