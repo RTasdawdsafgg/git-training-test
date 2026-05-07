@@ -7,7 +7,7 @@ env/
 
 # IDE
 .vscode/
-.idea/
+../.idea/
 *.swp
 
 # 测试
