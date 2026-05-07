@@ -19,10 +19,10 @@ from src.transforms import rotate, resize, flip
 
 def main():
     # 创建测试图像（如果没有sample.jpg）
-    image = np.random.randint(0, 255, (400, 600, 3), dtype=np.uint8)
+    #image = np.random.randint(0, 255, (400, 600, 3), dtype=np.uint8)
 
     # 或读取真实图像
-    # image = cv2.imread('examples/sample.jpg')
+    image = cv2.imread(r'bizhihui_com_202504021743559674415856.jpg')
 
     print("原始图像形状:", image.shape)
 
