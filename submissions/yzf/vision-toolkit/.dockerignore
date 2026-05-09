@@ -1,0 +1,56 @@
+# ========== 版本控制 ==========
+# .git 目录通常有几十 MB 甚至几 GB（含完整提交历史），绝对不能打进镜像
+.git/
+.gitignore
+.gitattributes
+
+# ========== Python 运行时产物 ==========
+# __pycache__ 是 Python 自动生成的字节码缓存
+# 打进镜像没用（Python 运行时会按需重新生成）
+__pycache__/
+*.py[cod]                    # *.pyc、*.pyo、*.pyd
+*.so                         # C 扩展编译产物（会按容器平台重新生成）
+*.egg-info/                  # setuptools 打包信息
+
+# ========== 虚拟环境 ==========
+# 虚拟环境只是宿主机的隔离手段，容器本身就是隔离的
+# 如果把 venv/ 打进镜像，还可能因为路径不对导致 Python 找不到库
+venv/
+env/
+.venv/
+.env/
+
+# ========== 测试产物 ==========
+.pytest_cache/               # pytest 的增量缓存
+.coverage                    # coverage.py 生成的覆盖率数据
+htmlcov/                     # coverage HTML 报告
+.tox/                        # tox 虚拟环境
+
+# ========== IDE 配置 ==========
+# 这些是每个人本机配置，不该进镜像
+.vscode/
+.idea/
+*.swp                        # vim 交换文件
+*.swo
+
+# ========== 构建/输出产物 ==========
+build/
+dist/
+output/                      # 运行时生成的结果，不是源码
+*.log
+
+# ========== 图片资源（除了必要样例）==========
+# 训练/测试用的图片可能有几 GB，打进镜像会让它膨胀
+*.jpg
+*.jpeg
+*.png
+*.bmp
+# 但保留文档里引用的示例图
+!examples/sample.jpg
+!docs/**/*.png
+
+# ========== Docker 文件自身 ==========
+# 既然是 Dockerfile 构建这个镜像，镜像里就不需要 Dockerfile 了
+Dockerfile*
+docker-compose*.yml
+.dockerignore
