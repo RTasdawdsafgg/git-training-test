@@ -89,3 +89,40 @@ A: Linux 下把当前用户加入 docker 组：`sudo usermod -aG docker $USER`�
 
 **Q: Windows 下 volume 挂载路径怎么写？**  
 A: PowerShell 用 `${PWD}`，Git Bash 用 `$(pwd)`，WSL 里用 Linux 路径。
+
+## 部署
+
+本项目提供一套 bash 脚本，一键完成构建、测试、启动。详见 `scripts/`。
+
+### 首次部署
+
+```bash
+./scripts/deploy.sh --dry-run    # 不真跑，先看执行计划
+./scripts/deploy.sh               # 正式部署
+./scripts/status.sh               # 查看状态
+```
+
+### 日常操作
+
+| 场景 | 命令 |
+|------|------|
+| 部署最新代码 | `./scripts/deploy.sh` |
+| 指定 tag 部署 | `./scripts/deploy.sh --image-tag v1.2.3` |
+| 不构建直接启 | `./scripts/deploy.sh --skip-build` |
+| 跳过冒烟测试 | `./scripts/deploy.sh --skip-tests` |
+| 回滚到上一版 | `./scripts/rollback.sh` |
+| 看服务状态 | `./scripts/status.sh` |
+| 状态（JSON） | `./scripts/status.sh --json` |
+
+### 日志与备份
+
+- 当前日志：`logs/deploy/latest.log`（软链指向最新一次）
+- 历史日志：`logs/deploy/deploy-YYYYMMDD-HHMMSS.log`（自动保留最近 10 份）
+- 备份记录：`.deploy-backup/last-image.txt`（供 rollback 使用）
+
+### 配置
+
+所有可调参数在 `scripts/config/deploy.conf`。常改的：
+- `SERVICE_PORT`：对外端口
+- `HEALTHCHECK_TIMEOUT`：健康检查总超时（秒）
+- `MIN_DISK_GB`：部署前最少可用磁盘

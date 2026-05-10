@@ -20,3 +20,6 @@ output/
 *.png
 !examples/*.jpg
 !examples/*.png
+
+logs/deploy/
+.deploy-backup/

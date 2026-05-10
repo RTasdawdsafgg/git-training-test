@@ -7,7 +7,7 @@ env/
 
 # IDE
 .vscode/
-../.idea/
+.idea/
 *.swp
 
 # 测试
@@ -20,3 +20,6 @@ output/
 *.png
 !examples/*.jpg
 !examples/*.png
+
+logs/deploy/
+.deploy-backup/
